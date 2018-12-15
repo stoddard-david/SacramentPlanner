@@ -64,6 +64,17 @@ namespace SacramentPlanner.Controllers
             return View(meeting);
         }
 
+        public async Task<IActionResult> AddSpeaker([Bind("ID,Name,Topic")] Speaker speaker)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(speaker);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(speaker);
+        }
+
         // GET: Meetings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
