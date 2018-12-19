@@ -113,6 +113,19 @@ a:hover, a:focus, a:active {
     width: 100%;
 }
 
+.sacramentInfo {
+  display: flex;
+}
+
+.fontBold {
+  font-weight: bold;
+}
+
+.dots {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted black;
+}
+
 /* QR code generator */
 #qrCode {
     margin: 15px;
