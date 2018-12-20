@@ -755,6 +755,12 @@ namespace SacramentPlanner.Models
             }
             return descs;
         }
+
+    }
+
+    public static class SpeakerList
+    {
+        public static List<Speaker> meetingSpeakers { get; set; }
     }
 
 }

@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<SacramentPlanner.Models.Meeting>
-
 @{
     ViewData["Title"] = "Meetings";
 }
-
 <h2>Index</h2>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -22,21 +19,40 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeetingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Conducting)
-            </td>
-            <td>
-              <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-              <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-              <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
-              <a asp-action="AddSpeaker" asp-route-id="@item.ID">Add Speaker</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Conducting)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                    <a asp-action="AddSpeaker" asp-route-MeetingID="@item.ID">Add Speaker</a> |
+                    <a asp-action="ShowSpeakers" asp-route-id="@item.ID">Show Speakers</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table>
+    <tbody>
+        @{
+            if (SpeakerList.meetingSpeakers != null)
+            {
+                foreach (var speaker in SpeakerList.meetingSpeakers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => speaker.Name)
+                        </td>
+                    </tr>
+                }
+            }
+        }
     </tbody>
 </table>

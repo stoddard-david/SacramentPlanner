@@ -11,4 +11,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="SacramentPlanner.db" />
+  </ItemGroup>
 </Project>
