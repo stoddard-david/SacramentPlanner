@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Add Speaker";
 }
-<h4>Speaker</h4>
+<h4>Add a Speaker</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,7 +29,8 @@
     </div>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+  <a asp-action="Details" asp-route-id="@Model.MeetingID">Back to the Program</a> |
+  <a asp-action="Index">Back to Meeting List</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

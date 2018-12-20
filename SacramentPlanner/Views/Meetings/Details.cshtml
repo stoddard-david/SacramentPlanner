@@ -31,7 +31,11 @@
       <div class="sacramentInfo">
         <span>Speaker: @item.Topic</span>
         <span class="dots">&nbsp;</span>
-        <span>@item.Name</span>
+        <span>
+          @item.Name &nbsp;
+          <a asp-action="EditSpeaker" asp-route-id="@item.ID">Edit</a> |
+          <a asp-action="DeleteSpeaker" asp-route-id="@item.ID">Delete</a>
+        </span>
       </div> 
     }
   }
@@ -46,6 +50,6 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="AddSpeaker" asp-route-id="@Model.ID">Add Speaker</a> |
+    <a asp-action="AddSpeaker" asp-route-MeetingID="@Model.ID">Add Speaker</a> |
     <a asp-action="Index">Back to List</a>
 </div>

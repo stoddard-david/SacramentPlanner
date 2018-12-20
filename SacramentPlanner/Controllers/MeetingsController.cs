@@ -138,8 +138,59 @@ namespace SacramentPlanner.Controllers
             return View(meeting);
         }
 
-        // GET: Meetings/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+    // GET: Speakers/Edit/5
+    public async Task<IActionResult> EditSpeaker(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var speaker = await _context.Speaker.FindAsync(id);
+      if (speaker == null)
+      {
+        return NotFound();
+      }
+      return View(speaker);
+    }
+
+    // POST: Speakers/Edit/5
+    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditSpeaker(int id, [Bind("ID,Name,Topic,MeetingID")] Speaker speaker)
+    {
+      if (id != speaker.ID)
+      {
+        return NotFound();
+      }
+
+      if (ModelState.IsValid)
+      {
+        try
+        {
+          _context.Update(speaker);
+          await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+          if (!SpeakerExists(speaker.ID))
+          {
+            return NotFound();
+          }
+          else
+          {
+            throw;
+          }
+        }
+        return RedirectToAction(nameof(Index));
+      }
+      return View(speaker);
+    }
+
+    // GET: Meetings/Delete/5
+    public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -171,5 +222,41 @@ namespace SacramentPlanner.Controllers
         {
             return _context.Meeting.Any(e => e.ID == id);
         }
+
+
+    // GET: Speaker/Delete/5
+    public async Task<IActionResult> DeleteSpeaker(int? id)
+    {
+      if (id == null)
+      {
+        return NotFound();
+      }
+
+      var speaker = await _context.Speaker
+          .FirstOrDefaultAsync(m => m.ID == id);
+      if (speaker == null)
+      {
+        return NotFound();
+      }
+
+      return View(speaker);
     }
+
+    // POST: Speaker/Delete/5
+    [HttpPost, ActionName("DeleteSpeaker")]
+    [ValidateAntiForgeryToken]
+    public async void DeleteSpeakerConfirmed(int id, int meetingID)
+    {
+      var speaker = await _context.Speaker.FindAsync(id);
+      _context.Speaker.Remove(speaker);
+      await _context.SaveChangesAsync();
+      Response.Redirect("/Meetings/Details/" + meetingID);
+      //return RedirectToAction(nameof(Index));
+    }
+
+    private bool SpeakerExists(int id)
+    {
+      return _context.Speaker.Any(e => e.ID == id);
+    }
+  }
 }
