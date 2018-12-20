@@ -1,47 +1,48 @@
 ﻿@model SacramentPlanner.Models.Meeting
-
 @{
     ViewData["Title"] = "The Program";
 }
-
 <h2 class="text-center">CIT 2nd Ward</h2>
-
 <div>
-  <h4 class="text-center">@Html.DisplayFor(model => model.MeetingDate)</h4>
-  <hr />
-  <div class="sacramentInfo">
-    <span>@Html.DisplayNameFor(model => model.Conducting)</span>
-    <span class="dots">&nbsp;</span>
-    <span>@Html.DisplayFor(model => model.Conducting)</span>
-  </div>
-  <br /><p class="text-center">
-    @Html.DisplayNameFor(model => model.OpeningHymn): @Html.DisplayFor(model => model.OpeningHymn)
-  </p>
-  <div class="sacramentInfo">
-    <span>@Html.DisplayNameFor(model => model.Invocation)</span>
-    <span class="dots">&nbsp;</span>
-    <span>@Html.DisplayFor(model => model.Invocation)</span>
-  </div>
-  <br /><p class="text-center">
-    @Html.DisplayNameFor(model => model.SacramentHymn): @Html.DisplayFor(model => model.SacramentHymn)
-  </p>
-        <br /><p class="text-center fontBold">
-    Administration of the Sacrament
-  </p>
-
-  <!-- For loop for the speakers -->
-
-  <br /><p class="text-center">
-    @Html.DisplayNameFor(model => model.ClosingHymn): @Html.DisplayFor(model => model.ClosingHymn)
-  </p>
-  <div class="sacramentInfo">
-    <span>@Html.DisplayNameFor(model => model.Benediction)</span>
-    <span class="dots">&nbsp;</span>
-    <span>@Html.DisplayFor(model => model.Benediction)</span>
-  </div><br />
+    <h4 class="text-center">@Html.DisplayFor(model => model.MeetingDate)</h4>
+    <hr />
+    <div class="sacramentInfo">
+        <span>@Html.DisplayNameFor(model => model.Conducting)</span>
+        <span class="dots">&nbsp;</span>
+        <span>@Html.DisplayFor(model => model.Conducting)</span>
+    </div>
+    <br /><p class="text-center">
+        @Html.DisplayNameFor(model => model.OpeningHymn): @Html.DisplayFor(model => model.OpeningHymn)
+    </p>
+    <div class="sacramentInfo">
+        <span>@Html.DisplayNameFor(model => model.Invocation)</span>
+        <span class="dots">&nbsp;</span>
+        <span>@Html.DisplayFor(model => model.Invocation)</span>
+    </div>
+    <br /><p class="text-center">
+        @Html.DisplayNameFor(model => model.SacramentHymn): @Html.DisplayFor(model => model.SacramentHymn)
+    </p>
+    <br /><p class="text-center fontBold">
+        Administration of the Sacrament
+    </p>
+    <p class="text-center fontBold">Speakers</p>
+    @{
+        foreach (var item in Descriptions.meetingSpeakers)
+        {
+    <p class="text-center"><span class="text-center fontBold">@item.Name</span> speaking on <span class="text-center fontBold">@item.Topic</span></p>
+        }
+    }
+    <br /><p class="text-center">
+        @Html.DisplayNameFor(model => model.ClosingHymn): @Html.DisplayFor(model => model.ClosingHymn)
+    </p>
+    <div class="sacramentInfo">
+        <span>@Html.DisplayNameFor(model => model.Benediction)</span>
+        <span class="dots">&nbsp;</span>
+        <span>@Html.DisplayFor(model => model.Benediction)</span>
+    </div><br />
 </div>
 <div>
-  <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-  <a asp-action="AddSpeaker" asp-route-id="@Model.ID">Add Speaker</a> |
-  <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="AddSpeaker" asp-route-id="@Model.ID">Add Speaker</a> |
+    <a asp-action="Index">Back to List</a>
 </div>

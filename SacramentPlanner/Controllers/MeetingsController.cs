@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +34,10 @@ namespace SacramentPlanner.Controllers
             }
 
             var meeting = await _context.Meeting
-                .FirstOrDefaultAsync(m => m.ID == id);
+                                        .FirstOrDefaultAsync(m => m.ID == id);
+
+            Descriptions.meetingSpeakers = (from s in _context.Speaker where meeting.ID == s.MeetingID select s).ToList();
+
             if (meeting == null)
             {
                 return NotFound();
@@ -45,7 +49,7 @@ namespace SacramentPlanner.Controllers
         // GET: Meetings/Create
         public IActionResult Create()
         {
-          return View();
+            return View();
         }
 
         // POST: Meetings/Create
@@ -64,7 +68,7 @@ namespace SacramentPlanner.Controllers
             return View(meeting);
         }
 
-        public async Task<IActionResult> AddSpeaker([Bind("ID,Name,Topic")] Speaker speaker)
+        public async Task<IActionResult> AddSpeaker([Bind("Name,Topic,MeetingID")] Speaker speaker)
         {
             if (ModelState.IsValid)
             {
@@ -73,6 +77,14 @@ namespace SacramentPlanner.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(speaker);
+        }
+
+        public void ShowSpeakers(int id)
+        {
+            //meetingSpeakers = from s in _context.Meeting where id = select s;
+
+            //SpeakerList.meetingSpeakers = (from s in _context.Meeting select s.Speakers).ToList();
+
         }
 
         // GET: Meetings/Edit/5

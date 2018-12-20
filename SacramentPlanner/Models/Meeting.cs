@@ -740,6 +740,8 @@ namespace SacramentPlanner.Models
 
     public static class Descriptions
     {
+        public static List<Speaker> meetingSpeakers;
+
         public static IEnumerable<string> GetDescriptions(Type type)
         {
             var descs = new List<string>();
@@ -755,6 +757,6 @@ namespace SacramentPlanner.Models
             }
             return descs;
         }
-    }
 
+    }
 }
