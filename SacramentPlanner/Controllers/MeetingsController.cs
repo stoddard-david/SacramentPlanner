@@ -34,7 +34,10 @@ namespace SacramentPlanner.Controllers
             }
 
             var meeting = await _context.Meeting
-                .FirstOrDefaultAsync(m => m.ID == id);
+                                        .FirstOrDefaultAsync(m => m.ID == id);
+
+            Descriptions.meetingSpeakers = (from s in _context.Speaker where meeting.ID == s.MeetingID select s).ToList();
+
             if (meeting == null)
             {
                 return NotFound();
@@ -46,7 +49,7 @@ namespace SacramentPlanner.Controllers
         // GET: Meetings/Create
         public IActionResult Create()
         {
-          return View();
+            return View();
         }
 
         // POST: Meetings/Create
